@@ -16,24 +16,24 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ArmSubsystem extends SubsystemBase {
 
   CANSparkMax armMotorOne;
-  // CANSparkMax armMotorTwo;
+  CANSparkMax armMotorTwo;
 
   DigitalInput limitSwitch;
   RelativeEncoder armEncoderOne;
-  // RelativeEncoder armEncoderTwo;
+  RelativeEncoder armEncoderTwo;
 
   double threshold = 3;
   boolean toggle = false;
 
   public ArmSubsystem() {
     armMotorOne = new CANSparkMax(RobotMap.armMotorOne, MotorType.kBrushless);
-    // armMotorTwo = new CANSparkMax(RobotMap.armMotorTwo, MotorType.kBrushless);
+    armMotorTwo = new CANSparkMax(RobotMap.armMotorTwo, MotorType.kBrushless);
     limitSwitch = new DigitalInput(RobotMap.limitSwitch);
 
     // armMotorTwo.setInverted(true);
 
     armEncoderOne = armMotorOne.getEncoder();
-    // armEncoderTwo = armMotorTwo.getEncoder();
+    armEncoderTwo = armMotorTwo.getEncoder();
 
 
   }
@@ -50,23 +50,23 @@ public class ArmSubsystem extends SubsystemBase {
 
 
   public void runArm(double speed) {
-    // armMotorOne.set(speed * 0.1);
-    // armMotorTwo.set(speed * 0.1);
+    armMotorOne.set(speed * 0.1);
+    armMotorTwo.set(speed * 0.1);
 
-    armMotorOne.set(speed);
+    // armMotorOne.set(speed);
     // armMotorTwo.set(speed);
 
     SmartDashboard.putNumber("#1 arm position", armEncoderOne.getPosition());
-    // SmartDashboard.putNumber("#2 arm position", armEncoderTwo.getPosition());
+    SmartDashboard.putNumber("#2 arm position", armEncoderTwo.getPosition());
     SmartDashboard.putNumber("#1 arm velocity", armEncoderOne.getVelocity());
-    // SmartDashboard.putNumber("#2 arm velocity", armEncoderTwo.getVelocity());
+    SmartDashboard.putNumber("#2 arm velocity", armEncoderTwo.getVelocity());
   }
 
   public void armReset() {
     armMotorOne.set(0);
-    // armMotorTwo.set(0);
+    armMotorTwo.set(0);
     armEncoderOne.setPosition(0);
-    // armEncoderTwo.setPosition(0);
+    armEncoderTwo.setPosition(0);
     toggle = !toggle;
   }
 
@@ -78,10 +78,16 @@ public class ArmSubsystem extends SubsystemBase {
     }
   }
 
-  public double encoderPosition() {
+  public double encoderOnePosition() {
     return armEncoderOne.getPosition();
   }
 
+  public double encoderTwoPosition() {
+    return armEncoderTwo.getPosition();
+  }
+
+
+  
   // public boolean limitSwitchClosed() {
   //   if (limitSwitch.get()) {
   //     SmartDashboard.putBoolean("switch closed", true);
