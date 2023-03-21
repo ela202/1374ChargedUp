@@ -39,7 +39,7 @@ public class AutoArm extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (Robot.ArmSubsystem.encoderPosition() >= threshold) {
+   if (Robot.ArmSubsystem.encoderOnePosition() >= threshold) {
       return true;
     }
     return false;

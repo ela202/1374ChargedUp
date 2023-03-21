@@ -28,9 +28,9 @@ public class ArmSubsystem extends SubsystemBase {
   public ArmSubsystem() {
     armMotorOne = new CANSparkMax(RobotMap.armMotorOne, MotorType.kBrushless);
     armMotorTwo = new CANSparkMax(RobotMap.armMotorTwo, MotorType.kBrushless);
-    limitSwitch = new DigitalInput(RobotMap.limitSwitch);
+   // limitSwitch = new DigitalInput(RobotMap.limitSwitch);
 
-    // armMotorTwo.setInverted(true);
+    armMotorTwo.setInverted(true);
 
     armEncoderOne = armMotorOne.getEncoder();
     armEncoderTwo = armMotorTwo.getEncoder();
